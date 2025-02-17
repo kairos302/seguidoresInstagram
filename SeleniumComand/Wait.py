@@ -24,4 +24,14 @@ def WaitByCssSelector(nav, tempo, name):
         element = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'input[name="'+name+'"]')))
         return 1
     except:
-        return 0      
+        return 0
+
+def WaitByCssSelectorSvgAriaLabel(nav, tempo, name):
+    try:
+        wait = WebDriverWait(nav, tempo)                               
+        element = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'svg[aria-label="'+name+'"]')))
+        return 1
+    except:
+        return 0 
+
+     

@@ -1,8 +1,11 @@
 #Rolar pagina
-def RollPage(nav, q):
+from selenium.webdriver.common.keys import Keys 
+import time
+
+def RoolPageWithSendKeysByXpath(nav, xpath, i):
     try:
-        c =  str(q)
-        nav.execute_script('window.scrollBy(0, '+c+')')
-    except Exception as e:
-        print(e)
+        time.sleep(2.5)
+        print("indice  "+ str(i))
+        nav.find_element("xpath", xpath).send_keys(Keys.PAGE_DOWN)
+    except:
         None

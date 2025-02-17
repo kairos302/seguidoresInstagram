@@ -48,3 +48,13 @@ def ImputNameWithTab(nav, name, elemento):
         ClickByTab(nav)
     except:
         None
+
+def ImputAriaLabel(nav, name, elemento):
+    
+    try:
+        time.sleep(0.5)
+        nav.find_element(By.CSS_SELECTOR,'input[aria-label="'+name+'"]').clear()
+        time.sleep(1)
+        nav.find_element(By.CSS_SELECTOR,'input[aria-label="'+name+'"]').send_keys(elemento)
+    except:
+        None

@@ -1,31 +1,65 @@
 from selenium import webdriver
-from GetCnpjs.indexCnpjs import getCnpj
-from SeleniumComand.Input import ImputByXpath
-from SeleniumComand.RoolPage import RollPage
+from LogConta.logInstagram import logInsta
+from Instagram.instagram import InstagramFunction
 from SeleniumComand.Click import *
-from GetCnpjs.indexCnpjs import getCnpj
+from SeleniumComand.Input import *
+from tkinter import *
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
-service = Service()
-options = webdriver.ChromeOptions()
-nav = webdriver.Chrome(service=service, options=options)
+def index(user, senha, seguir):
+    service = Service()
+    options = webdriver.ChromeOptions()
+    nav = webdriver.Chrome(service=service, options=options)
+    nav.get("https://www.instagram.com/") 
+    time.sleep(2)
+    rtLog = logInsta(nav, user, senha)
+    if rtLog == 1:
+        contadorSeguidores = InstagramFunction(nav, seguir)
+        if contadorSeguidores > 0:
+            rtTextoSeguidores['text'] = "Conseguiu seguir o perfil "+seguir+ ", cerca de "+contadorSeguidores+ " pessoas"
+        else:
+            rtTextoSeguidores['text'] = "Não conseguiu seguir ninguem do perfil "+seguir
+    else:
+        rtTextoSeguidores['text'] = "Não conseguiu entrar na conta do Instagram"
+    #nav.quit()
 
-def index():
-    nav.get("https://casadosdados.com.br/solucao/cnpj/pesquisa-avancada") 
-    
-    #Atividade Principal (CNAE)
-    ImputByXpath(nav, '//*[@id="__nuxt"]/div/div[2]/section/div[2]/div[2]/section/div/div/div/div/div[1]/input', '4721102')
+janela = Tk()
+janela.title('Instagram')
+#INICIA COM VALORES DEFAULT
+#USER
+u1 = Label(janela, text="User")
+u1.place(x=10,y=10)
+u = StringVar()
+user = Entry(janela, bd =5, text=u)
+u.set('revelino566')
+user.place(x=60,y=10)
 
-    #PESQUISAR
-    time.sleep(3)
-    RollPage(nav, 300)
-    ClickByTab(nav)
-    ClickByXpath(nav, '//*[@id="__nuxt"]/div/div[2]/section/div[6]/div/div/a[1]')
-    
-    getCnpj(nav)
-    time.sleep(5)
-    nav.quit()
+#SENHA
+s1=Label(janela,text="senha")
+s1.place(x=10,y=40)
+s = StringVar()
+senha=Entry(janela,bd=5, text=s)
+s.set("canario1234")
+senha.place(x=60,y=40)
 
-index()
+#seguir
+seg1=Label(janela,text="seguir")
+seg1.place(x=10,y=70)
+s = StringVar()
+seguir=Entry(janela,bd=5, text=s)
+s.set('eduarrdagutierrez')
+seguir.place(x=60,y=70)
+
+rtTextoSeguidores=Label(janela,text="")
+rtTextoSeguidores.place(x=5,y=150)
+
+B = Button(janela, text= "Clique para começar", command=lambda: index(user.get(), senha.get(), seguir.get()), fg="black", bg="light blue")
+B.place(x=65, y=110)
+janela.geometry("250x250+10+10")
+
+janela.mainloop()
+
+
+
