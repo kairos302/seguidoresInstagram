@@ -33,7 +33,7 @@ u1 = Label(janela, text="User")
 u1.place(x=10,y=10)
 u = StringVar()
 user = Entry(janela, bd =5, text=u)
-u.set('revelino566')
+u.set('seu perfil')
 user.place(x=60,y=10)
 
 #SENHA
@@ -41,7 +41,7 @@ s1=Label(janela,text="senha")
 s1.place(x=10,y=40)
 s = StringVar()
 senha=Entry(janela,bd=5, text=s)
-s.set("canario1234")
+s.set("sua senha")
 senha.place(x=60,y=40)
 
 #seguir
@@ -49,7 +49,7 @@ seg1=Label(janela,text="seguir")
 seg1.place(x=10,y=70)
 s = StringVar()
 seguir=Entry(janela,bd=5, text=s)
-s.set('eduarrdagutierrez')
+s.set('perfil para seguir')
 seguir.place(x=60,y=70)
 
 rtTextoSeguidores=Label(janela,text="")
