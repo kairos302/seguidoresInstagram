@@ -18,7 +18,7 @@ def index(user, senha, seguir):
     if rtLog == 1:
         contadorSeguidores = InstagramFunction(nav, seguir)
         if contadorSeguidores > 0:
-            rtTextoSeguidores['text'] = "Conseguiu seguir o perfil "+seguir+ ", cerca de "+contadorSeguidores+ " pessoas"
+            rtTextoSeguidores['text'] = "Conseguiu seguir cerca de "+str(contadorSeguidores)+ " pessoas"
         else:
             rtTextoSeguidores['text'] = "Não conseguiu seguir ninguem do perfil "+seguir
     else:
@@ -49,7 +49,7 @@ seg1=Label(janela,text="seguir")
 seg1.place(x=10,y=70)
 s = StringVar()
 seguir=Entry(janela,bd=5, text=s)
-s.set('eduarrdagutierrez')
+s.set('pycodebr')
 seguir.place(x=60,y=70)
 
 rtTextoSeguidores=Label(janela,text="")

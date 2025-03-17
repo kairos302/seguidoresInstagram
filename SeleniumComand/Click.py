@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from SeleniumComand.RoolPage import *
 from SeleniumComand.GetValue import getValueByXpath
+from SeleniumComand.Wait import WaitByXpath
 
 def ClickByAlert(nav, xpath):
     try:
@@ -126,32 +127,24 @@ def TryVerificationIfTextButtonIsSeguir(nav, xpath):
         return 1
     return 0
     
-def ClickSeguir(nav):
-    nd = ''                         
-    for numberDiv in range(1, 6, 1):
-        rtSegu = ClickByXpath(nav, '/html/body/div[5]/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div['+str(numberDiv)+']/div[1]/div/div[1]/div/div/div/div[3]/div/button')
-        PoupOpenWhenClickButtonSeguir(nav)
-        if rtSegu == 1:
-           nd = str(numberDiv)
-           break
-    
-    if nd != '':
-        contSeg = 0
-        for i in range(2, 100, 1):   
-            time.sleep(3)
-            rtBtnSeguir = TryVerificationIfTextButtonIsSeguir(nav, '/html/body/div[5]/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div['+nd+']/div[1]/div/div['+str(i)+']/div/div/div/div[3]/div/button/div/div')               
-            if rtBtnSeguir == 1:
-                rtSegu = ClickByXpath(nav, '/html/body/div[5]/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div['+nd+']/div[1]/div/div['+str(i)+']/div/div/div/div[3]/div/button')
-                contSeg = contSeg + rtSegu
-                ClickOkInPoupTenteNovamenteMaisTarde(nav)
-            if i % 4 == 0:
-                RoolPageWithSendKeysByXpath(nav, '/html/body/div[5]/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div['+nd+']/div[1]/div/div['+str(i)+']/div/div/div/div[3]/div/button', i)
-            #Regra instagram de poder seguir 30 usuarios durante 5 minutos
-            if i % 20 == 0:
-               #time.sleep(320)
-               time.sleep(10)
+def ClickSeguir(nav, listaDiv):
 
-        return contSeg
-    else:
-        return 0
+    numDiv1 = listaDiv[0]
+    numDiv2 = listaDiv[1]
+    contSeg = 0
+    for i in range(numDiv2, 100, 1):   
+        rtBtnSeguir = TryVerificationIfTextButtonIsSeguir(nav, '/html/body/div[5]/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div['+str(numDiv1)+']/div[1]/div/div['+str(i)+']/div/div/div/div[3]/div/button/div/div')               
+        if rtBtnSeguir == 1:
+            time.sleep(3)
+            rtSegu = ClickByXpath(nav, '/html/body/div[5]/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div['+str(numDiv1)+']/div[1]/div/div['+str(i)+']/div/div/div/div[3]/div/button')
+            contSeg = contSeg + rtSegu
+            ClickOkInPoupTenteNovamenteMaisTarde(nav)
+        if i % 4 == 0:
+            RoolPageWithSendKeysByXpath(nav, '/html/body/div[5]/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div['+str(numDiv1)+']/div[1]/div/div['+str(i)+']/div/div/div/div[3]/div/button', i)
+        #Regra instagram de poder seguir 30 usuarios durante 5 minutos
+        if i % 20 == 0:
+            time.sleep(320)
+    return contSeg
+    
+
 

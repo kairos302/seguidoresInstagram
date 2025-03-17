@@ -1,11 +1,15 @@
 import time
 from SeleniumComand.Click import *
 from SeleniumComand.Input import *
+from SeleniumComand.Wait import WaitForSearchXpathButtonSeguir
 
 def DentroPerfil(nav):
-    time.sleep(5)
+    time.sleep(7)
     #tela seguidores(Aberta)
-    rtSegu = ClickSeguir(nav)
+    listaDiv =  WaitForSearchXpathButtonSeguir(nav)
+    rtSegu = 0
+    if len(listaDiv)> 0:
+        rtSegu = ClickSeguir(nav, listaDiv)
     return rtSegu
 
 def InstagramFunction(nav, seguir):

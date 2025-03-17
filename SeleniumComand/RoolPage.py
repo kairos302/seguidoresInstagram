@@ -7,5 +7,6 @@ def RoolPageWithSendKeysByXpath(nav, xpath, i):
         time.sleep(2.5)
         print("indice  "+ str(i))
         nav.find_element("xpath", xpath).send_keys(Keys.PAGE_DOWN)
+        time.sleep(1.5)
     except:
         None
