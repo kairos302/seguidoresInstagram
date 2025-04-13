@@ -4,7 +4,7 @@ from SeleniumComand.Input import *
 from SeleniumComand.Wait import WaitForSearchXpathButtonSeguir
 
 def DentroPerfil(nav):
-    time.sleep(7)
+    time.sleep(10)
     #tela seguidores(Aberta)
     listaDiv =  WaitForSearchXpathButtonSeguir(nav)
     rtSegu = 0

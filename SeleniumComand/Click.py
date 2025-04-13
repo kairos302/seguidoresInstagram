@@ -28,7 +28,6 @@ def ClickByXpath(nav, xpath):
         nav.find_element("xpath", xpath).click()
         return 1
     except Exception as e:
-        print(e)
         return 0
 
 def ClickByEsc(nav):
@@ -129,22 +128,23 @@ def TryVerificationIfTextButtonIsSeguir(nav, xpath):
     
 def ClickSeguir(nav, listaDiv):
 
-    numDiv1 = listaDiv[0]
+    numDiv  = listaDiv[0]
     numDiv2 = listaDiv[1]
+    numDiv3 = listaDiv[2]
     contSeg = 0
-    for i in range(numDiv2, 100, 1):   
-        rtBtnSeguir = TryVerificationIfTextButtonIsSeguir(nav, '/html/body/div[5]/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div['+str(numDiv1)+']/div[1]/div/div['+str(i)+']/div/div/div/div[3]/div/button/div/div')               
+    for i in range(numDiv3, 100, 1):   
+        rtBtnSeguir = TryVerificationIfTextButtonIsSeguir(nav, '/html/body/div['+str(numDiv)+']/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div['+str(numDiv2)+']/div[1]/div/div['+str(i)+']/div/div/div/div[3]/div/button/div/div')               
         if rtBtnSeguir == 1:
             time.sleep(3)
-            rtSegu = ClickByXpath(nav, '/html/body/div[5]/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div['+str(numDiv1)+']/div[1]/div/div['+str(i)+']/div/div/div/div[3]/div/button')
+            rtSegu = ClickByXpath(nav, '/html/body/div['+str(numDiv)+']/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div['+str(numDiv2)+']/div[1]/div/div['+str(i)+']/div/div/div/div[3]/div/button')
             contSeg = contSeg + rtSegu
             ClickOkInPoupTenteNovamenteMaisTarde(nav)
-        if i % 4 == 0:
-            RoolPageWithSendKeysByXpath(nav, '/html/body/div[5]/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div['+str(numDiv1)+']/div[1]/div/div['+str(i)+']/div/div/div/div[3]/div/button', i)
+        if i % 3 == 0:
+            FunctionRollPageDownAndUp(nav, '/html/body/div['+str(numDiv)+']/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div['+str(numDiv2)+']/div[1]/div/div['+str(i)+']/div/div/div/div[3]/div/button', i)
         #Regra instagram de poder seguir 30 usuarios durante 5 minutos
         if i % 20 == 0:
-            time.sleep(320)
+            #time.sleep(300)
+            time.sleep(5)
     return contSeg
     
-
 
